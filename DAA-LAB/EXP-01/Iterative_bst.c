@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 60000
+#define SIZE 50000
 
 
 struct Node* insertIterative(struct Node* , int );  //  functions for creating and and inserting iteratively in a binary tree.
