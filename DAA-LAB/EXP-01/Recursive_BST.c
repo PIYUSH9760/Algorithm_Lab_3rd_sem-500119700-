@@ -1,10 +1,10 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE 60000
+#define NUM_SIZES 5
 
-struct Node* insertRecursive(struct Node* , int);  // Prototype functions for creating and and inserting iteratively in a binary tree.
+struct Node* insertRecursive(struct Node*, int);  // Prototype for inserting recursively in a binary tree.
 struct Node* createNode(int);
 
 // Structure for a node in the binary search tree.
@@ -14,47 +14,61 @@ struct Node {
     struct Node* right;
 };
 
-int main(){
+int main() {
+    // Define the sizes to test
+    int sizes[NUM_SIZES] = {50000, 100000, 500000, 1000000, 5000000};
 
-    clock_t start_time;  // clock_t is a data type for measuring processor time in clock ticks.
-    clock_t end_time;
-    double total_time;
+    for (int j = 0; j < NUM_SIZES; j++) {
+        int SIZE = sizes[j];
+        printf("Inserting %d elements:\n", SIZE);
 
-    start_time=clock(); 
-    
-// Initialize the array to store random numbers
-    int arr[SIZE];
+        clock_t start_time;
+        clock_t end_time;
+        double total_time;
 
-    // Seed the random number generator
-    srand(time(0));
+        // Initialize the array to store random numbers
+        int *arr = (int *)malloc(SIZE * sizeof(int));
+        if (arr == NULL) {
+            fprintf(stderr, "Memory allocation failed!\n");
+            return 1; // Exit if memory allocation fails
+        }
 
-    // Generate random numbers and store them in the array
-    for (int i = 0; i < SIZE; i++) {
-        arr[i] = rand();
+        // Seed the random number generator
+        srand(time(0));
+
+        // Generate random numbers and store them in the array
+        for (int i = 0; i < SIZE; i++) {
+            arr[i] = rand();
+        }
+
+        // Create an empty binary search tree (root node is NULL)
+        struct Node* root = NULL;
+
+        start_time = clock(); // Starting the clock to measure time.
+
+        // Insert numbers from the array into the binary search tree recursively
+        for (int i = 0; i < SIZE; i++) {
+            root = insertRecursive(root, arr[i]);
+        }
+
+        end_time = clock();
+        total_time = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+
+        printf("Total elapsed time for %d elements is %f seconds\n\n", SIZE, total_time);
+
+        free(arr); // Free the allocated memory for the array
     }
-    printf("\n");
 
-    // Create an empty binary search tree (root node is NULL)
-    struct Node* root = NULL;
-
-    // Insert numbers from the array into the binary search tree iteratively
-    for (int i = 0; i < SIZE; i++) {
-        root = insertRecursive(root, arr[i]);
-    }
-
-    end_time=clock();
-    total_time=((double)(end_time - start_time)) / CLOCKS_PER_SEC;
-    
-    printf("Total elapsed time is %f seconds", total_time);
-    
-    
     return 0;
 }
-
 
 // Function to create a new node
 struct Node* createNode(int data) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation failed!\n");
+        exit(1); // Exit if memory allocation fails
+    }
     newNode->data = data;
     newNode->left = NULL;
     newNode->right = NULL;
