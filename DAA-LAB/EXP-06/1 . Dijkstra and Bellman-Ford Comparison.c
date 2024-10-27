@@ -135,14 +135,14 @@ void compareAlgorithms() {
     double bellman_time_3 = calculateExecutionTimeBellmanFord(bellmanFord, graph3_edges, 8, 12, 0);
 
     // Output comparison results for Dijkstra's and Bellman-Ford algorithms
-    printf("Dijkstra Time (ms) for Graph 1: %.5f\n", dijkstra_time_1);
-    printf("Bellman-Ford Time (ms) for Graph 1: %.5f\n", bellman_time_1);
+    printf("Time  Taken  by  Dijkstra  for GRAPH-1: %.5f\n", dijkstra_time_1);
+    printf("Time Taken by Bellman-Ford for GRAPH-1: %.5f\n", bellman_time_1);
 
-    printf("Dijkstra Time (ms) for Graph 2: %.5f\n", dijkstra_time_2);
-    printf("Bellman-Ford Time (ms) for Graph 2: %.5f\n", bellman_time_2);
+    printf("Time  Taken  by  Dijkstra  for GRAPH-2: %.5f\n", dijkstra_time_2);
+    printf("Time Taken by Bellman-Ford for GRAPH-2: %.5f\n", bellman_time_2);
 
-    printf("Dijkstra Time (ms) for Graph 3: %.5f\n", dijkstra_time_3);
-    printf("Bellman-Ford Time (ms) for Graph 3: %.5f\n", bellman_time_3);
+    printf("Time  Taken  by  Dijkstra  for GRAPH-3: %.5f\n", dijkstra_time_3);
+    printf("Time Taken by Bellman-Ford for GRAPH-3: %.5f\n", bellman_time_3);
 }
 
 int main() {
